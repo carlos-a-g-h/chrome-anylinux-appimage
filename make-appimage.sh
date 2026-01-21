@@ -14,7 +14,7 @@ export ARCH VERSION
 export OUTPATH=./dist
 #export ADD_HOOKS="self-updater.bg.hook"
 #export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}|latest|*$ARCH.AppImage.zsync"
-export ICON="/opt/google/chrome/product_logo_256.png"
+export ICON="/usr/share/icons/google-chrome.png"
 export OUTNAME="$APPIMAGE_STEM".AppImage
 export DESKTOP="/usr/share/applications/google-chrome.desktop"
 
@@ -31,9 +31,11 @@ export DEPLOY_GLYCIN=0
 
 mkdir -p AppDir/bin
 
-cp -va /opt/google/chrome/* AppDir/bin/
+cp -va /opt/google/chrome AppDir/bin/
 
-cat "$DESKTOP" | sed -e 's|google-chrome-stable|google-chrome-stable --no-sandbox|' -e 's|Name=Google Chrome|Name=Google Chrome (No Sandbox)|' > AppDir/google-chrome-no-sandbox.desktop
+cp -v "/opt/google/chrome/product_logo_256.png" "$ICON"
+
+# cat "$DESKTOP" | sed -e 's|google-chrome-stable|google-chrome-stable --no-sandbox|' -e 's|Name=Google Chrome|Name=Google Chrome (No Sandbox)|' > AppDir/google-chrome-no-sandbox.desktop
 
 # Deploy dependencies
 

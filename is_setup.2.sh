@@ -17,9 +17,6 @@ Available flags/arguments
 --no-links
 	Will not create symlinks that go from /usr/bin/ to the AppImage
 
---no-config
-	Will not copy the recommended config during the installation
-
 --no-desktop
 	Will not create/update the application desktop file and its icon
 
@@ -45,13 +42,12 @@ MSG_NOT="[ ! ]"
 MSG_USE_FORCE="Run again with --force"
 
 INSTALL=0
-COPY_CONFIG=1
+# COPY_CONFIG=1
 MAKE_LINKS=1
 MAKE_DESKTOP=1
 OVERWRITE=0
 declare -a ARGUMENTS=(
 	"--install"
-	"--no-config"
 	"--no-links"
 	"--no-desktop"
 	"--force"
@@ -72,11 +68,11 @@ do
 		INSTALL=1
 	fi
 
-	if [ "$FLAG" == "--no-config" ]
-	then
-		DET=1
-		COPY_CONFIG=0
-	fi
+	#if [ "$FLAG" == "--no-config" ]
+	#then
+	#	DET=1
+	#	COPY_CONFIG=0
+	#fi
 
 	if [ "$FLAG" == "--no-links" ]
 	then
