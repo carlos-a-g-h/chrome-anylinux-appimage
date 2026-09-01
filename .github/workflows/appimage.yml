@@ -6,7 +6,14 @@ on:
   # We default to rebuilding every 21 days, change this to your liking
   #schedule:
   #  - cron: "0 7 1/21 * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      enable_release:
+        description: 'Enable release job'
+        required: true
+        default: 'true'
+        type: boolean
+
   push:
     branches:
       - main
@@ -41,7 +48,7 @@ jobs:
           path: dist
 
   release:
-    if: ${{ github.ref_name == 'main' }}
+    if: ${{ github.ref_name == 'main' && github.event.inputs.enable_release == 'true' }}
     needs: [build]
     permissions: write-all
     runs-on: ubuntu-latest
